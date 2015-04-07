@@ -8,6 +8,11 @@ require './lib/link' # needs to be done after setup hence the placing
 DataMapper.finalize
 DataMapper.auto_upgrade!
 
-class BookmarkManger < Sinatra::Base
+class BookmarkManager < Sinatra::Base
+
+  get '/' do
+    @links = Link.all
+    erb :index
+  end
   run! if app_file == $PROGRAM_NAME
 end
