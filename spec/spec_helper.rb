@@ -1,8 +1,9 @@
 ENV['RACK_ENV'] = 'test'
 
-require_relative '../server'
+require_relative '../app/server'
 require 'database_cleaner'
 require 'capybara/rspec'
+require_relative 'helpers/session'
 
 Capybara.app = BookmarkManager
 
@@ -24,4 +25,5 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+  config.include SessionHelpers
 end
