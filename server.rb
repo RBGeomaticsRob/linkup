@@ -3,6 +3,7 @@ require 'data_mapper'
 
 env = ENV['RACK_ENV'] || 'development'
 
+# DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, "postgres://localhost/bookmark_manager_#{env}")
 require './lib/link' # needs to be done after setup hence the placing
 require './lib/user'
@@ -41,7 +42,8 @@ class BookmarkManager < Sinatra::Base
 
   post '/users' do
     user = User.create(email: params[:email],
-                password: params[:password])
+                       password: params[:password],
+                       password_confirmation: params[:password_confirmation])
     session[:user_id] = user.id
     redirect to('/')
   end
