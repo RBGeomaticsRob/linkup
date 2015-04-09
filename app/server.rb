@@ -1,13 +1,17 @@
 require 'sinatra/base'
 require 'data_mapper'
 require 'rack-flash'
+require 'sinatra/partial'
 
 class BookmarkManager < Sinatra::Base
 
+  register Sinatra::Partial
+  set :partial_template_engine, :erb
   enable :sessions
   set :session_secret, 'super secret'
   use Rack::Flash
   use Rack::MethodOverride
+
 
   helpers do
     def current_user
