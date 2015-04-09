@@ -70,9 +70,9 @@ feature 'user resets password' do
     visit '/'
     click_link('Sign in')
     click_link('Forgotten Password?')
-    fill_in 'Email', with: 'test@test.com'
+    fill_in 'email', with: 'test@test.com'
     Token.any_instance.stub(:hash) { "AAA000" }
-    allow(RestClient).to receive(:post)
+    # allow(RestClient).to receive(:post)
     click_button('Send')
     visit '/users/reset/AAA000'
     expect(page).to have_content("test@test.com")

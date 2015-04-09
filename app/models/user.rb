@@ -10,6 +10,8 @@ class User
   property :id, Serial
   property :email, String, unique: true, message: 'This email is already taken'
   property :password_digest, Text
+  property :token, String
+  property :timestamp, DateTime
 
   def password=(password)
     @password = password

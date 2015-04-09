@@ -11,7 +11,7 @@ class BookmarkManager < Sinatra::Base
   set :session_secret, 'super secret'
   use Rack::Flash
   use Rack::MethodOverride
-
+  DataMapper::Logger.new($stdout, :debug)
   helpers do
     def current_user
       @current_user ||= User.get(session[:user_id]) if session[:user_id]
