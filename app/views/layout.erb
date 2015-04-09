@@ -7,9 +7,15 @@
   </head>
 
   <body>
-    <%= partial :header %>
-    <%= partial :flash %>
-    <%= yield %>
-    <%= partial :footer %>
+    <div class="wrapper">
+      <%= partial :header %>
+      <%= partial :flash %>
+      <div id='container'>
+        <%= yield %>
+      </div>
+    </div>
+    <div class="footer">
+      <%= partial :footer %>
+    </div>
   </body>
 </html>
