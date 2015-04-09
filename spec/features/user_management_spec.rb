@@ -58,3 +58,27 @@ feature 'User signs out' do
   end
 
 end
+
+feature 'user resets password' do
+  before(:each) do
+    User.create(email: 'test@test.com',
+                password: 'test',
+                password_confirmation: 'test')
+  end
+
+  scenario 'with an exisiting email address' do
+    visit '/'
+    click_link('Sign in')
+    click_link('Forgotten Password?')
+    fill_in 'Email', with: 'test@test.com'
+    Token.any_instance.stub(:hash) { "AAA000" }
+    allow(RestClient).to receive(:post)
+    click_button('Send')
+    visit '/users/reset/AAA000'
+    expect(page).to have_content("test@test.com")
+    fill_in 'password', with: 'newpassword'
+    fill_in 'password_confirmation', with: 'newpassword'
+    click_button('Submit')
+    expect(page).to have_content('Welcome, test@test.com')
+  end
+end
