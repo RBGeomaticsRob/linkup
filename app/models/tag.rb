@@ -6,5 +6,8 @@ class Tag
 
   property :id, Serial
   property :text, String
+  property :description, String
+  property :extra_item, String
+  property :another, String
 
 end
